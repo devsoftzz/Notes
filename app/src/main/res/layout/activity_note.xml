@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteActivity">
+    android:orientation="vertical"
+    tools:context=".NoteActivity"
+    android:background="#ffd6c9"
+    android:weightSum="100">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStart="0dp">
+            <include layout="@layout/toolbar_note"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.devsoftzz.notes.Util.EditTextWithLines
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:gravity="top"
+        android:lineSpacingExtra="6dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/transparent"
+        android:layout_weight="100"/>
+    <TextView
+        android:id="@+id/editmessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Double Tap Anywhere To Edit"
+        android:background="#6F6F6F"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+</LinearLayout>

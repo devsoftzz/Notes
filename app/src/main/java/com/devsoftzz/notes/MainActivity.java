@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
             mNotes.add(note);
         }
         mNotesRecyclerAdapter.notifyDataSetChanged();
+
     }
 
     private void initRecyclerView() {
