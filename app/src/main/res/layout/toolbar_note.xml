@@ -14,35 +14,13 @@
         android:layout_weight="15"
         android:background="?attr/selectableItemBackgroundBorderless"/>
 
-    <ImageButton
-        android:id="@+id/checkBtn"
-        android:layout_width="0dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_check_black_24dp"
-        android:layout_weight="15"
-        android:background="?attr/selectableItemBackgroundBorderless"/>
-
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:text="Some Title Text"
-        android:layout_weight="83"
-        android:textSize="23sp"
-        android:padding="4dp"
-        android:textColor="@android:color/black"/>
-
     <EditText
         android:id="@+id/editview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:visibility="gone"
-        android:background="@android:color/white"
-        android:text="Some Title Text"
+        android:background="#32FFFFFF"
+        android:text="Title"
         android:layout_weight="83"
         android:textSize="23sp"
         android:padding="4dp"
