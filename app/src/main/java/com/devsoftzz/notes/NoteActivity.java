@@ -17,7 +17,7 @@ import com.devsoftzz.notes.Persistance.NoteRepository;
 import com.devsoftzz.notes.Util.EditTextWithLines;
 import com.devsoftzz.notes.Util.Utility;
 
-public class NoteActivity extends AppCompatActivity{
+public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Notes";
     private note mNote;
@@ -34,6 +34,7 @@ public class NoteActivity extends AppCompatActivity{
         setContentView(R.layout.activity_note);
 
         mBack = findViewById(R.id.backBtn);
+        mBack.setOnClickListener(this);
         mText = findViewById(R.id.edittext);
         mTitle = findViewById(R.id.editview);
         mNoteRepository = new NoteRepository(this);
@@ -48,33 +49,34 @@ public class NoteActivity extends AppCompatActivity{
             mText.setText(mNote.getContent());
             mTitle.setText(mNote.getTitle());
         }
+    }
 
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
-                //Add Data To Database / Update Data
-                //Go Back
-                mFinalNote.setTitle(mTitle.getText().toString().trim());
-                mFinalNote.setContent(mText.getText().toString().trim());
-                mFinalNote.setTimestamp(Utility.getTimeStamp());
+    @Override
+    public void onBackPressed() {
+        mBack.callOnClick();
+        super.onBackPressed();
+    }
 
-                if(NewNote){
-                    if(mFinalNote.getTitle().equals("") && mFinalNote.getContent().equals("")){
-                        finish();
-                        return;
-                    }
-                    mNoteRepository.insertNoteTask(mFinalNote);
-                }else {
-                    mFinalNote.setId(mNote.getId());
-                    if(mFinalNote.getTitle().equals("") && mFinalNote.getContent().equals("")){
-                        mNoteRepository.deleteNoteTask(mFinalNote);
-                        finish();
-                    }
-                    mNoteRepository.updateNoteTask(mFinalNote);
-                }
+    @Override
+    public void onClick(View v) {
+        mFinalNote.setTitle(mTitle.getText().toString().trim());
+        mFinalNote.setContent(mText.getText().toString().trim());
+        mFinalNote.setTimestamp(Utility.getTimeStamp());
+
+        if(NewNote){
+            if((mFinalNote.getTitle().equals("") || mFinalNote.getTitle().equals("Title")) && mFinalNote.getContent().equals("")){
+                finish();
+                return;
+            }
+            mNoteRepository.insertNoteTask(mFinalNote);
+        }else {
+            mFinalNote.setId(mNote.getId());
+            if((mFinalNote.getTitle().equals("") || mFinalNote.getTitle().equals("Title")) && mFinalNote.getContent().equals("")){
+                mNoteRepository.deleteNoteTask(mFinalNote);
                 finish();
             }
-        });
+            mNoteRepository.updateNoteTask(mFinalNote);
+        }
+        finish();
     }
 }
