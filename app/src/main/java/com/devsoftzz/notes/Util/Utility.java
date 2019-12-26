@@ -18,29 +18,29 @@ public class Utility {
     public static String getMonthFromNumber(String monthNumber){
         switch (monthNumber){
             case "01":
-                return "JAN";
+                return "Jan";
             case "02":
-                return "FEB";
+                return "Feb";
             case "03":
-                return "MAR";
+                return "Mar";
             case "04":
-                return "APR";
+                return "Apr";
             case "05":
-                return "MAY";
+                return "May";
             case "06":
-                return "JUN";
+                return "Jun";
             case "07":
-                return "JUL";
+                return "Jul";
             case "08":
-                return "AUG";
+                return "Aug";
             case "09":
-                return "SEP";
+                return "Sep";
             case "10":
-                return "OCT";
+                return "Oct";
             case "11":
-                return "NOV";
+                return "Nov";
             case "12":
-                return "DEC";
+                return "Dec";
                 default:
                     return monthNumber;
         }

@@ -42,10 +42,12 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         Note = mNotes.get(position);
         holder.Title.setText(Note.getTitle());
         holder.Timestamp.setText(Note.getTimestamp());
+        holder.mContent.setText(Note.getContent());
 
         holder.mItem.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in));
         holder.Title.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in));
         holder.Timestamp.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in));
+        holder.mContent.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in));
     }
 
     @Override
@@ -55,7 +57,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView Title,Timestamp;
+        TextView Title,Timestamp,mContent;
         LinearLayout mItem;
         onNoteListner onNoteListner;
         public ViewHolder(@NonNull View itemView, onNoteListner listner) {
@@ -64,6 +66,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
             Title = itemView.findViewById(R.id.title);
             Timestamp = itemView.findViewById(R.id.timestamp);
             mItem = itemView.findViewById(R.id.item);
+            mContent = itemView.findViewById(R.id.content);
             this.onNoteListner=listner;
             itemView.setOnClickListener(this);
         }
