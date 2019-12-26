@@ -12,16 +12,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.devsoftzz.notes.Models.note;
+import com.devsoftzz.notes.Persistance.NoteDao;
+import com.devsoftzz.notes.Persistance.NoteRepository;
 import com.devsoftzz.notes.Util.EditTextWithLines;
+import com.devsoftzz.notes.Util.Utility;
 
 public class NoteActivity extends AppCompatActivity{
 
     private static final String TAG = "Notes";
     private note mNote;
+    private note mFinalNote;
     private ImageButton mBack;
     private EditTextWithLines mText;
     private EditText mTitle;
     private boolean NewNote;
+    private NoteRepository mNoteRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,9 @@ public class NoteActivity extends AppCompatActivity{
         mBack = findViewById(R.id.backBtn);
         mText = findViewById(R.id.edittext);
         mTitle = findViewById(R.id.editview);
+        mNoteRepository = new NoteRepository(this);
+        mNote = new note();
+        mFinalNote = new note();
 
         if(!getIntent().hasExtra("SelectedNote")){
             NewNote = true;
@@ -47,6 +55,24 @@ public class NoteActivity extends AppCompatActivity{
                 //TODO
                 //Add Data To Database / Update Data
                 //Go Back
+                mFinalNote.setTitle(mTitle.getText().toString().trim());
+                mFinalNote.setContent(mText.getText().toString().trim());
+                mFinalNote.setTimestamp(Utility.getTimeStamp());
+
+                if(NewNote){
+                    if(mFinalNote.getTitle().equals("") && mFinalNote.getContent().equals("")){
+                        finish();
+                        return;
+                    }
+                    mNoteRepository.insertNoteTask(mFinalNote);
+                }else {
+                    mFinalNote.setId(mNote.getId());
+                    if(mFinalNote.getTitle().equals("") && mFinalNote.getContent().equals("")){
+                        mNoteRepository.deleteNoteTask(mFinalNote);
+                        finish();
+                    }
+                    mNoteRepository.updateNoteTask(mFinalNote);
+                }
                 finish();
             }
         });
